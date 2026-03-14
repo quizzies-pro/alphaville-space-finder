@@ -36,7 +36,6 @@ const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [overStage, setOverStage] = useState<string | null>(null);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
-  const [overStage, setOverStage] = useState<string | null>(null);
 
   const moveToStage = useCallback(
     async (leadId: string, newStage: string) => {
