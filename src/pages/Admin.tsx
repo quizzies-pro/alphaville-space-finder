@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useState as useStateReact } from "react";
 import KanbanBoard from "@/components/admin/KanbanBoard";
 
 interface Lead {
