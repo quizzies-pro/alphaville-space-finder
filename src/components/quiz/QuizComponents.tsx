@@ -97,7 +97,7 @@ export function RadioCards({
   );
 }
 
-export function QuizLayout({ children, step, totalSteps = 5 }: { children: React.ReactNode; step?: number; totalSteps?: number }) {
+export function QuizLayout({ children, step, totalSteps = 4 }: { children: React.ReactNode; step?: number; totalSteps?: number }) {
   const progressWidth = step && step >= 1 && step <= totalSteps ? (step / totalSteps) * 100 : 0;
 
   return (
