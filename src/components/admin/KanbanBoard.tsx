@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -28,54 +29,72 @@ const STAGES = [
 
 interface KanbanBoardProps {
   leads: Lead[];
-  onUpdate: () => void;
+  onLeadsChange: (leads: Lead[]) => void;
 }
 
-const KanbanBoard = ({ leads, onUpdate }: KanbanBoardProps) => {
+const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
   const [draggingId, setDraggingId] = useState<string | null>(null);
+  const [overStage, setOverStage] = useState<string | null>(null);
+
+  const moveToStage = useCallback(
+    async (leadId: string, newStage: string) => {
+      const lead = leads.find((l) => l.id === leadId);
+      if (!lead || lead.stage === newStage) return;
+
+      // Optimistic update
+      const updated = leads.map((l) =>
+        l.id === leadId ? { ...l, stage: newStage } : l
+      );
+      onLeadsChange(updated);
+
+      const { error } = await supabase
+        .from("quiz_leads")
+        .update({ stage: newStage })
+        .eq("id", leadId);
+
+      if (error) {
+        // Revert
+        onLeadsChange(leads);
+        toast.error("Erro ao mover lead");
+      }
+    },
+    [leads, onLeadsChange]
+  );
 
   const handleDragStart = (e: React.DragEvent, leadId: string) => {
     setDraggingId(leadId);
     e.dataTransfer.setData("text/plain", leadId);
     e.dataTransfer.effectAllowed = "move";
+    // Make drag image semi-transparent
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.style.opacity = "0.5";
+    }
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragEnd = (e: React.DragEvent) => {
+    setDraggingId(null);
+    setOverStage(null);
+    if (e.currentTarget instanceof HTMLElement) {
+      e.currentTarget.style.opacity = "1";
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent, stageId: string) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
+    setOverStage(stageId);
   };
 
-  const handleDrop = async (e: React.DragEvent, stageId: string) => {
+  const handleDragLeave = () => {
+    setOverStage(null);
+  };
+
+  const handleDrop = (e: React.DragEvent, stageId: string) => {
     e.preventDefault();
     const leadId = e.dataTransfer.getData("text/plain");
     setDraggingId(null);
-
-    const lead = leads.find((l) => l.id === leadId);
-    if (!lead || lead.stage === stageId) return;
-
-    const { error } = await supabase
-      .from("quiz_leads")
-      .update({ stage: stageId })
-      .eq("id", leadId);
-
-    if (error) {
-      toast.error("Erro ao mover lead");
-    } else {
-      onUpdate();
-    }
-  };
-
-  const handleMoveToStage = async (leadId: string, stageId: string) => {
-    const { error } = await supabase
-      .from("quiz_leads")
-      .update({ stage: stageId })
-      .eq("id", leadId);
-
-    if (error) {
-      toast.error("Erro ao mover lead");
-    } else {
-      onUpdate();
-    }
+    setOverStage(null);
+    moveToStage(leadId, stageId);
   };
 
   return (
@@ -84,23 +103,21 @@ const KanbanBoard = ({ leads, onUpdate }: KanbanBoardProps) => {
         const stageLeads = leads.filter((l) => l.stage === stage.id);
         const isDescartado = stage.id === "descartado";
         const isFechada = stage.id === "contratacao_fechada";
+        const isOver = overStage === stage.id;
 
         return (
           <div
             key={stage.id}
             className="flex-shrink-0 w-[260px] flex flex-col"
-            onDragOver={handleDragOver}
+            onDragOver={(e) => handleDragOver(e, stage.id)}
+            onDragLeave={handleDragLeave}
             onDrop={(e) => handleDrop(e, stage.id)}
           >
             {/* Column header */}
             <div className={`flex items-center gap-2 mb-3 px-2 ${isDescartado ? "opacity-60" : ""}`}>
               <span
                 className={`w-2 h-2 rounded-full ${
-                  isFechada
-                    ? "bg-green-500"
-                    : isDescartado
-                    ? "bg-red-500"
-                    : "bg-primary"
+                  isFechada ? "bg-green-500" : isDescartado ? "bg-red-500" : "bg-primary"
                 }`}
               />
               <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground font-medium">
@@ -112,17 +129,25 @@ const KanbanBoard = ({ leads, onUpdate }: KanbanBoardProps) => {
             </div>
 
             {/* Column body */}
-            <div className={`flex-1 rounded-lg border border-border/50 bg-card/30 p-2 space-y-2 min-h-[100px] transition-colors ${
-              draggingId ? "border-primary/30" : ""
-            }`}>
-              {stageLeads.map((lead) => (
-                <LeadCard
-                  key={lead.id}
-                  lead={lead}
-                  onDragStart={handleDragStart}
-                  onMoveToStage={handleMoveToStage}
-                />
-              ))}
+            <div
+              className={`flex-1 rounded-lg border p-2 space-y-2 min-h-[100px] transition-all duration-200 ${
+                isOver && draggingId
+                  ? "border-primary bg-primary/5 scale-[1.01]"
+                  : "border-border/50 bg-card/30"
+              }`}
+            >
+              <AnimatePresence mode="popLayout">
+                {stageLeads.map((lead) => (
+                  <LeadCard
+                    key={lead.id}
+                    lead={lead}
+                    isDragging={draggingId === lead.id}
+                    onDragStart={handleDragStart}
+                    onDragEnd={handleDragEnd}
+                    onMoveToStage={moveToStage}
+                  />
+                ))}
+              </AnimatePresence>
             </div>
           </div>
         );
@@ -133,19 +158,29 @@ const KanbanBoard = ({ leads, onUpdate }: KanbanBoardProps) => {
 
 function LeadCard({
   lead,
+  isDragging,
   onDragStart,
+  onDragEnd,
   onMoveToStage,
 }: {
   lead: Lead;
+  isDragging: boolean;
   onDragStart: (e: React.DragEvent, id: string) => void;
+  onDragEnd: (e: React.DragEvent) => void;
   onMoveToStage: (id: string, stage: string) => void;
 }) {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <div
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: isDragging ? 0.5 : 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       draggable
-      onDragStart={(e) => onDragStart(e, lead.id)}
+      onDragStart={(e) => onDragStart(e as unknown as React.DragEvent, lead.id)}
+      onDragEnd={(e) => onDragEnd(e as unknown as React.DragEvent)}
       className="bg-card border border-border rounded-lg p-3 cursor-grab active:cursor-grabbing hover:border-primary/40 transition-colors relative group"
     >
       <p className="text-sm font-medium mb-1 truncate">{lead.lead_name}</p>
@@ -173,7 +208,6 @@ function LeadCard({
             </svg>
           </a>
 
-          {/* Move menu */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -212,7 +246,7 @@ function LeadCard({
           </div>
         </>
       )}
-    </div>
+    </motion.div>
   );
 }
 
