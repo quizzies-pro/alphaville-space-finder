@@ -1,21 +1,37 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuiz } from "@/components/quiz/QuizContext";
 import { Step, StepLabel, QuizButton, QuizInput, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const QuizStep4 = () => {
   const navigate = useNavigate();
   const { data, update, validateContacts } = useQuiz();
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!data.investment_match) return;
     if (!validateContacts()) return;
-    // Save to localStorage
-    const submission = { ...data, submitted_at: new Date().toISOString() };
-    const existing = JSON.parse(localStorage.getItem("quiz_leads") || "[]");
-    existing.push(submission);
-    localStorage.setItem("quiz_leads", JSON.stringify(existing));
-    navigate("/resultado");
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.from("quiz_leads").insert({
+        lead_name: data.lead_name,
+        lead_email: data.lead_email,
+        lead_whatsapp: data.lead_whatsapp,
+        company_profile: data.company_profile,
+        relocation_moment: data.relocation_moment,
+        investment_match: data.investment_match,
+        custom_message: data.custom_message || null,
+      });
+      if (error) throw error;
+      navigate("/resultado");
+    } catch {
+      toast.error("Erro ao enviar. Tente novamente.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
