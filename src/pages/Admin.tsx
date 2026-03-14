@@ -269,7 +269,7 @@ const Admin = () => {
                           hour: "2-digit", minute: "2-digit",
                         })}
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-8 py-5" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center gap-3">
                           <a
                             href={`https://wa.me/55${lead.lead_whatsapp.replace(/\D/g, "")}`}
