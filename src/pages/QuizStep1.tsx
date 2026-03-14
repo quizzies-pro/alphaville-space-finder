@@ -1,10 +1,30 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "@/components/quiz/QuizContext";
 import { Step, StepLabel, QuizButton, QuizInput, QuizLayout } from "@/components/quiz/QuizComponents";
+import { trackLead, trackPageView } from "@/lib/meta-tracking";
 
 const QuizStep1 = () => {
   const navigate = useNavigate();
   const { data, errors, update, validateContacts } = useQuiz();
+
+  useEffect(() => {
+    trackPageView();
+    trackLead();
+  }, []);
+
+  const handleContinue = () => {
+    if (validateContacts()) {
+      // Track with user data after validation
+      trackLead({
+        email: data.lead_email,
+        phone: data.lead_whatsapp,
+        firstName: data.lead_name.split(" ")[0],
+        lastName: data.lead_name.split(" ").slice(1).join(" ") || undefined,
+      });
+      navigate("/etapa-2");
+    }
+  };
 
   return (
     <QuizLayout step={1}>
@@ -24,7 +44,7 @@ const QuizStep1 = () => {
           </p>
         </div>
         <div className="mt-8">
-          <QuizButton onClick={() => { if (validateContacts()) navigate("/etapa-2"); }}>
+          <QuizButton onClick={handleContinue}>
             Continuar
           </QuizButton>
         </div>
