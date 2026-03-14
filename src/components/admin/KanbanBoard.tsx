@@ -178,12 +178,14 @@ function LeadCard({
   onDragStart,
   onDragEnd,
   onMoveToStage,
+  onClick,
 }: {
   lead: Lead;
   isDragging: boolean;
   onDragStart: (e: React.DragEvent, id: string) => void;
   onDragEnd: (e: React.DragEvent) => void;
   onMoveToStage: (id: string, stage: string) => void;
+  onClick: () => void;
 }) {
   const [showMenu, setShowMenu] = useState(false);
 
