@@ -180,7 +180,7 @@ const Index = () => {
               <Step key="s1">
                 <StepLabel>Etapa 1</StepLabel>
                 <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Para liberar os detalhes completos do imóvel, informe seus dados:
+                  Para liberar os <em className="italic">detalhes completos</em> do imóvel, informe seus dados:
                 </h2>
                 <div className="space-y-8">
                   <QuizInput label="Nome" value={data.lead_name} onChange={(v) => update("lead_name", v)} error={errors.lead_name} />
