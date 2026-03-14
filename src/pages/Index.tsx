@@ -303,7 +303,7 @@ const Index = () => {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-light mb-6">
+                  <h2 className="text-2xl md:text-3xl font-light mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Seu perfil é compatível com este imóvel
                   </h2>
                   <p className="text-muted-foreground mb-10 max-w-md mx-auto text-sm leading-relaxed">
