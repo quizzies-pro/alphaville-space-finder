@@ -167,6 +167,10 @@ const KanbanBoard = ({ leads, onLeadsChange, onDeleteLead }: KanbanBoardProps) =
               moveToStage(selectedLead.id, stage);
               setSelectedLead({ ...selectedLead, stage });
             }}
+            onDelete={() => {
+              onDeleteLead(selectedLead.id);
+              setSelectedLead(null);
+            }}
           />
         )}
       </AnimatePresence>
