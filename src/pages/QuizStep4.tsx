@@ -29,7 +29,7 @@ const QuizStep4 = () => {
           R$30.000<span className="text-lg text-muted-foreground">/mês</span>
         </p>
         <p className="text-muted-foreground mb-10 text-sm">
-          (sem condomínio e IPTU) — esse investimento faz sentido para o momento da sua empresa hoje?
+          (sem condomínio e IPTU). Esse investimento faz sentido para o momento da sua empresa hoje?
         </p>
         <RadioCards
           options={[
