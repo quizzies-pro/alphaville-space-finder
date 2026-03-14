@@ -362,4 +362,13 @@ function DeleteButton({ onDelete }: { onDelete: () => void }) {
   );
 }
 
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-0.5">{label}</p>
+      <p className="text-sm">{value}</p>
+    </div>
+  );
+}
+
 export default Admin;
