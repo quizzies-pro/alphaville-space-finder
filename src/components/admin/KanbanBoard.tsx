@@ -199,6 +199,7 @@ function LeadCard({
       draggable
       onDragStart={(e) => onDragStart(e as unknown as React.DragEvent, lead.id)}
       onDragEnd={(e) => onDragEnd(e as unknown as React.DragEvent)}
+      onClick={onClick}
       className="bg-card border border-border rounded-lg p-3 cursor-grab active:cursor-grabbing hover:border-primary/40 transition-colors relative group"
     >
       <p className="text-sm font-medium mb-1 truncate">{lead.lead_name}</p>
