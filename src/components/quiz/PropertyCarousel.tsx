@@ -30,7 +30,7 @@ export function PropertyCarousel() {
   return (
     <div className="w-full mb-8 md:mb-12">
       {/* Main image */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg border border-border">
+      <div className="relative w-full aspect-square overflow-hidden rounded-lg border border-border">
         <AnimatePresence mode="wait">
           <motion.img
             key={current}
