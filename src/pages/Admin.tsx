@@ -39,6 +39,7 @@ const Admin = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("kanban");
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
   useEffect(() => {
     const check = async () => {
