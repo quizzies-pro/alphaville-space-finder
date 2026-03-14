@@ -180,7 +180,7 @@ const Index = () => {
               <Step key="s1">
                 <StepLabel>Etapa 1</StepLabel>
                 <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Para liberar os detalhes completos do imóvel, informe seus dados:
+                  Para liberar os <em className="italic">detalhes completos</em> do imóvel, informe seus dados:
                 </h2>
                 <div className="space-y-8">
                   <QuizInput label="Nome" value={data.lead_name} onChange={(v) => update("lead_name", v)} error={errors.lead_name} />
@@ -199,7 +199,7 @@ const Index = () => {
               <Step key="s2">
                 <StepLabel>Etapa 2</StepLabel>
                 <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Qual melhor descreve sua empresa hoje?
+                  Qual melhor descreve <em className="italic">sua empresa</em> hoje?
                 </h2>
                 <RadioCards
                   options={[
@@ -224,7 +224,7 @@ const Index = () => {
               <Step key="s3">
                 <StepLabel>Etapa 3</StepLabel>
                 <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Em que momento sua empresa está em relação a um novo espaço comercial?
+                  Em que <em className="italic">momento</em> sua empresa está em relação a um <em className="italic">novo espaço comercial</em>?
                 </h2>
                 <RadioCards
                   options={[
@@ -248,7 +248,7 @@ const Index = () => {
               <Step key="s4">
                 <StepLabel>Etapa 4</StepLabel>
                 <h2 className="text-xl md:text-2xl font-light mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Considerando que o valor do aluguel deste andar comercial é de aproximadamente
+                  Considerando que o <em className="italic">valor do aluguel</em> deste andar comercial é de aproximadamente
                 </h2>
                 <p className="text-3xl md:text-4xl font-light mb-6 text-primary">
                   R$30.000<span className="text-lg text-muted-foreground">/mês</span>
