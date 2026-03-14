@@ -329,7 +329,7 @@ const Index = () => {
                     </ul>
                   </div>
                   <QuizButton onClick={() => window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(`Olá, completei a avaliação do andar comercial em Alphaville. Meu nome é ${data.lead_name}.`)}`, "_blank")}>
-                    Quero receber as informações
+                    Agendar uma visita ao local
                   </QuizButton>
                 </div>
               </Step>
