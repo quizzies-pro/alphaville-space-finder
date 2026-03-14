@@ -223,7 +223,7 @@ const Index = () => {
             {step === 3 && (
               <Step key="s3">
                 <StepLabel>Etapa 3</StepLabel>
-                <h2 className="text-2xl md:text-3xl font-light mb-10">
+                <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Em que momento sua empresa está em relação a um novo espaço comercial?
                 </h2>
                 <RadioCards
