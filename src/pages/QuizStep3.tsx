@@ -21,13 +21,11 @@ const QuizStep3 = () => {
             "Estou apenas pesquisando o mercado",
           ]}
           value={data.relocation_moment}
-          onChange={(v) => update("relocation_moment", v)}
+          onChange={(v) => {
+            update("relocation_moment", v);
+            setTimeout(() => navigate("/etapa-4"), 400);
+          }}
         />
-        <div className="mt-12">
-          <QuizButton onClick={() => data.relocation_moment && navigate("/etapa-4")}>
-            Continuar
-          </QuizButton>
-        </div>
       </Step>
     </QuizLayout>
   );

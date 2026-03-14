@@ -22,13 +22,11 @@ const QuizStep2 = () => {
             "Estou apenas pesquisando opções",
           ]}
           value={data.company_profile}
-          onChange={(v) => update("company_profile", v)}
+          onChange={(v) => {
+            update("company_profile", v);
+            setTimeout(() => navigate("/etapa-3"), 400);
+          }}
         />
-        <div className="mt-12">
-          <QuizButton onClick={() => data.company_profile && navigate("/etapa-3")}>
-            Continuar
-          </QuizButton>
-        </div>
       </Step>
     </QuizLayout>
   );
