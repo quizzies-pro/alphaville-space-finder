@@ -105,14 +105,14 @@ const Index = () => {
                   </div>
 
                   {/* Main title */}
-                  <h1 className="text-2xl md:text-5xl leading-snug md:leading-tight mb-6 md:mb-8 px-2 md:px-0" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h1 className="text-4xl md:text-6xl leading-snug md:leading-tight mb-6 md:mb-8 px-2 md:px-0" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Sua empresa já está<br />
                     <em className="italic">maior do que o espaço</em><br />
                     onde ela opera?
                   </h1>
 
                   {/* Subtitle */}
-                  <p className="text-muted-foreground text-xs md:text-base mb-8 md:mb-12 max-w-xl mx-auto leading-relaxed px-4 md:px-0">
+                  <p className="text-muted-foreground text-sm md:text-lg mb-8 md:mb-12 max-w-xl mx-auto leading-relaxed px-4 md:px-0">
                     Um andar comercial completo em Alphaville está disponível para locação.
                     {" "}Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
                   </p>
