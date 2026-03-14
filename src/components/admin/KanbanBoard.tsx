@@ -154,6 +154,20 @@ const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
           </div>
         );
       })}
+
+      {/* Lead Detail Popup */}
+      <AnimatePresence>
+        {selectedLead && (
+          <LeadDetailPopup
+            lead={selectedLead}
+            onClose={() => setSelectedLead(null)}
+            onMoveToStage={(stage) => {
+              moveToStage(selectedLead.id, stage);
+              setSelectedLead({ ...selectedLead, stage });
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
