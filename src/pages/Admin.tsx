@@ -84,6 +84,16 @@ const Admin = () => {
     }
   };
 
+  const handleStageChange = async (leadId: string, newStage: string) => {
+    const prev = leads;
+    setLeads(leads.map((l) => l.id === leadId ? { ...l, stage: newStage } : l));
+    const { error } = await supabase.from("quiz_leads").update({ stage: newStage }).eq("id", leadId);
+    if (error) {
+      setLeads(prev);
+      toast.error("Erro ao atualizar status");
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginLoading(true);
