@@ -158,8 +158,8 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className={`mx-auto px-6 py-8 ${viewMode === "kanban" ? "max-w-full" : "max-w-6xl"}`}>
-        <div className="flex items-center justify-between mb-8">
+      <div className="mx-auto px-10 py-12 max-w-full">
+        <div className="flex items-center justify-between mb-12">
           <h1 className="text-2xl font-light" style={{ fontFamily: "'Playfair Display', serif" }}>
             Leads recebidos
           </h1>
@@ -207,32 +207,32 @@ const Admin = () => {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-card">
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Nome</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Email</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">WhatsApp</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Perfil</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Momento</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Investimento</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Data</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Ação</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Nome</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Email</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">WhatsApp</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Perfil</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Momento</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Investimento</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Data</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Ação</th>
                   </tr>
                 </thead>
                 <tbody>
                   {leads.map((lead) => (
                     <tr key={lead.id} className="border-b border-border last:border-0 hover:bg-card/50 transition-colors">
-                      <td className="px-4 py-3">{lead.lead_name}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{lead.lead_email}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{lead.lead_whatsapp}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.company_profile || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.relocation_moment || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.investment_match || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">
+                      <td className="px-6 py-5 font-medium">{lead.lead_name}</td>
+                      <td className="px-6 py-5 text-muted-foreground">{lead.lead_email}</td>
+                      <td className="px-6 py-5 text-muted-foreground">{lead.lead_whatsapp}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs max-w-[160px]">{lead.company_profile || "—"}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs max-w-[160px]">{lead.relocation_moment || "—"}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs max-w-[180px]">{lead.investment_match || "—"}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs whitespace-nowrap">
                         {new Date(lead.submitted_at).toLocaleDateString("pt-BR", {
                           day: "2-digit", month: "2-digit", year: "2-digit",
                           hour: "2-digit", minute: "2-digit",
                         })}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
                           <a
                             href={`https://wa.me/55${lead.lead_whatsapp.replace(/\D/g, "")}`}
