@@ -1,0 +1,208 @@
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+interface Lead {
+  id: string;
+  lead_name: string;
+  lead_email: string;
+  lead_whatsapp: string;
+  company_profile: string | null;
+  relocation_moment: string | null;
+  investment_match: string | null;
+  custom_message: string | null;
+  submitted_at: string;
+}
+
+const Admin = () => {
+  const [authed, setAuthed] = useState(false);
+  const [checking, setChecking] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(false);
+
+  useEffect(() => {
+    const check = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        const { data: roles } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("role", "admin")
+          .single();
+        if (roles) {
+          setAuthed(true);
+          await loadLeads();
+        }
+      }
+      setChecking(false);
+    };
+    check();
+  }, []);
+
+  const loadLeads = async () => {
+    setLeadsLoading(true);
+    const { data, error } = await supabase
+      .from("quiz_leads")
+      .select("*")
+      .order("submitted_at", { ascending: false });
+    if (error) {
+      toast.error("Erro ao carregar leads");
+    } else {
+      setLeads(data || []);
+    }
+    setLeadsLoading(false);
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+
+      const { data: roles, error: roleError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("role", "admin")
+        .single();
+
+      if (roleError || !roles) {
+        await supabase.auth.signOut();
+        toast.error("Acesso negado.");
+        return;
+      }
+
+      setAuthed(true);
+      await loadLeads();
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Erro ao fazer login");
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setAuthed(false);
+    setLeads([]);
+  };
+
+  if (checking) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <p className="text-muted-foreground text-sm">Verificando...</p>
+      </div>
+    );
+  }
+
+  if (!authed) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-6">
+        <div className="w-full max-w-sm">
+          <h1 className="text-2xl font-light mb-8 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Admin
+          </h1>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-2">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full bg-transparent border-b border-border text-foreground text-base py-3 focus:outline-none focus:border-primary transition-colors"
+              />
+            </div>
+            <div>
+              <label className="text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-2">Senha</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full bg-transparent border-b border-border text-foreground text-base py-3 focus:outline-none focus:border-primary transition-colors"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loginLoading}
+              className="w-full bg-primary text-primary-foreground px-8 py-4 text-xs tracking-[0.2em] uppercase font-medium hover:bg-transparent hover:text-primary border border-primary transition-all duration-300 disabled:opacity-50"
+            >
+              {loginLoading ? "Entrando..." : "Entrar"}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-2xl font-light" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Leads recebidos
+          </h1>
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-muted-foreground tracking-[0.15em] uppercase">
+              {leads.length} lead{leads.length !== 1 ? "s" : ""}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Sair
+            </button>
+          </div>
+        </div>
+
+        {leadsLoading ? (
+          <p className="text-muted-foreground text-sm">Carregando...</p>
+        ) : leads.length === 0 ? (
+          <p className="text-muted-foreground text-sm">Nenhum lead cadastrado ainda.</p>
+        ) : (
+          <div className="border border-border rounded-lg overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border bg-card">
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Nome</th>
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Email</th>
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">WhatsApp</th>
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Perfil</th>
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Momento</th>
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Investimento</th>
+                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.map((lead) => (
+                    <tr key={lead.id} className="border-b border-border last:border-0 hover:bg-card/50 transition-colors">
+                      <td className="px-4 py-3">{lead.lead_name}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{lead.lead_email}</td>
+                      <td className="px-4 py-3 text-muted-foreground">{lead.lead_whatsapp}</td>
+                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.company_profile || "—"}</td>
+                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.relocation_moment || "—"}</td>
+                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.investment_match || "—"}</td>
+                      <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">
+                        {new Date(lead.submitted_at).toLocaleDateString("pt-BR", {
+                          day: "2-digit", month: "2-digit", year: "2-digit",
+                          hour: "2-digit", minute: "2-digit",
+                        })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Admin;
