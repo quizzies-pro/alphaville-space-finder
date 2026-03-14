@@ -226,15 +226,12 @@ const Admin = () => {
         ) : (
           <div className="border border-border rounded-lg overflow-hidden">
             <div className="overflow-x-auto scrollbar-thin">
-              <table className="text-sm" style={{ minWidth: "1400px", width: "100%" }}>
+              <table className="text-sm w-full">
                 <thead>
                   <tr className="border-b border-border bg-card">
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Nome</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Email</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">WhatsApp</th>
-                    <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Perfil</th>
-                    <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Momento</th>
-                    <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Investimento</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Status</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Data</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Contato</th>
@@ -242,12 +239,10 @@ const Admin = () => {
                 </thead>
                 <tbody>
                   {leads.map((lead) => (
-                    <tr key={lead.id} className="border-b border-border last:border-0 hover:bg-card/50 transition-colors">
+                    <tr key={lead.id} className="border-b border-border last:border-0 hover:bg-card/50 transition-colors cursor-pointer" onClick={() => setSelectedLead(lead)}>
                       <td className="px-8 py-5 font-medium whitespace-nowrap">{lead.lead_name}</td>
                       <td className="px-8 py-5 text-muted-foreground whitespace-nowrap">{lead.lead_email}</td>
                       <td className="px-8 py-5 text-muted-foreground whitespace-nowrap">{lead.lead_whatsapp}</td>
-                      <td className="px-8 py-5 text-muted-foreground text-xs">{lead.company_profile || "—"}</td>
-                      <td className="px-8 py-5 text-muted-foreground text-xs">{lead.relocation_moment || "—"}</td>
                       <td className="px-8 py-5 text-muted-foreground text-xs">{lead.investment_match || "—"}</td>
                       <td className="px-8 py-5">
                         <select
