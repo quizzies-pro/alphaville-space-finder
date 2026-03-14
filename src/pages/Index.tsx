@@ -97,36 +97,36 @@ const Index = () => {
               <Step key="landing">
                 <div className="text-center">
                   {/* Top badge */}
-                  <div className="inline-flex items-center gap-2 border border-border rounded-full px-5 py-2 mb-10">
-                    <span className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
+                  <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-8 md:mb-10">
+                    <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary" />
+                    <span className="text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.25em] uppercase text-muted-foreground">
                       Oportunidade exclusiva · Alphaville, SP
                     </span>
                   </div>
 
                   {/* Main title */}
-                  <h1 className="text-3xl md:text-5xl leading-tight mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h1 className="text-2xl md:text-5xl leading-snug md:leading-tight mb-6 md:mb-8 px-2 md:px-0" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Sua empresa já está<br />
                     <em className="italic">maior do que o espaço</em><br />
                     onde ela opera?
                   </h1>
 
                   {/* Subtitle */}
-                  <p className="text-muted-foreground text-sm md:text-base mb-12 max-w-xl mx-auto leading-relaxed">
-                    Um andar comercial completo em Alphaville está disponível para locação.<br />
-                    Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
+                  <p className="text-muted-foreground text-xs md:text-base mb-8 md:mb-12 max-w-xl mx-auto leading-relaxed px-4 md:px-0">
+                    Um andar comercial completo em Alphaville está disponível para locação.
+                    {" "}Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
                   </p>
 
                   {/* Stat cards */}
-                  <div className="grid grid-cols-3 gap-3 mb-8">
+                  <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6 md:mb-8">
                     {[
                       { big: "Andar", sub: "COMPLETO\nCORPORATIVO" },
                       { big: "Alphaville", sub: "SÃO PAULO" },
                       { big: "3 min", sub: "PARA SUA\nAVALIAÇÃO" },
                     ].map((card) => (
-                      <div key={card.big} className="border border-border bg-card rounded-lg py-5 px-3 flex flex-col items-center justify-center min-h-[100px]">
-                        <p className="text-xl md:text-2xl font-medium mb-1">{card.big}</p>
-                        <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground whitespace-pre-line leading-snug">
+                      <div key={card.big} className="border border-border bg-card rounded-lg py-4 md:py-5 px-2 md:px-3 flex flex-col items-center justify-center min-h-[80px] md:min-h-[100px]">
+                        <p className="text-base md:text-2xl font-medium mb-1">{card.big}</p>
+                        <p className="text-[8px] md:text-[10px] tracking-[0.1em] md:tracking-[0.15em] uppercase text-muted-foreground whitespace-pre-line leading-snug">
                           {card.sub}
                         </p>
                       </div>
