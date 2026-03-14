@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 // TODO: Substituir pelo link real do WhatsApp
-const WHATSAPP_LINK = "https://wa.me/5511999999999";
+const WHATSAPP_LINK = "https://wa.me/5511969735649";
 
 const QuizStep4 = () => {
   const { data, update } = useQuiz();
