@@ -3,6 +3,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import KanbanBoard from "@/components/admin/KanbanBoard";
 
+const STAGES = [
+  { id: "lead_capturado", label: "Lead Capturado" },
+  { id: "qualificacao", label: "Qualificação" },
+  { id: "primeiro_contato", label: "Primeiro Contato" },
+  { id: "visita_agendada", label: "Visita Agendada" },
+  { id: "proposta_enviada", label: "Proposta Enviada" },
+  { id: "negociacao", label: "Negociação" },
+  { id: "contratacao_fechada", label: "Contratação Fechada" },
+  { id: "descartado", label: "Descartado" },
+];
+
 interface Lead {
   id: string;
   lead_name: string;
