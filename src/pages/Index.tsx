@@ -105,7 +105,7 @@ const Index = () => {
                   </div>
 
                   {/* Main title */}
-                  <h1 className="text-4xl md:text-6xl leading-snug md:leading-tight mb-6 md:mb-8 px-2 md:px-0" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  <h1 className="text-3xl md:text-6xl leading-snug md:leading-tight mb-6 md:mb-8 px-2 md:px-0" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Sua empresa já está<br />
                     <em className="italic">maior do que o espaço</em><br />
                     onde ela opera?
