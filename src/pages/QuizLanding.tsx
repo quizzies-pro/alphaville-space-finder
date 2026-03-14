@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Step, QuizButton, QuizLayout } from "@/components/quiz/QuizComponents";
+import { PropertyCarousel } from "@/components/quiz/PropertyCarousel";
 
 const QuizLanding = () => {
   const navigate = useNavigate();
@@ -28,6 +29,9 @@ const QuizLanding = () => {
             Um andar comercial completo em Alphaville está disponível para locação.
             {" "}Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
           </p>
+
+          {/* Carrossel de fotos */}
+          <PropertyCarousel />
 
           {/* Stat cards */}
           <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6 md:mb-8">
