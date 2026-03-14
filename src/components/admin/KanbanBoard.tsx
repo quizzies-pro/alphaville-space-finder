@@ -33,7 +33,7 @@ interface KanbanBoardProps {
   onDeleteLead: (leadId: string) => void;
 }
 
-const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
+const KanbanBoard = ({ leads, onLeadsChange, onDeleteLead }: KanbanBoardProps) => {
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [overStage, setOverStage] = useState<string | null>(null);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
