@@ -30,6 +30,9 @@ const QuizLanding = () => {
             {" "}Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
           </p>
 
+          {/* Carrossel de fotos */}
+          <PropertyCarousel />
+
           {/* Stat cards */}
           <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6 md:mb-8">
             {[
