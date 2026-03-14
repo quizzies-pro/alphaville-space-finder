@@ -158,7 +158,7 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className={`mx-auto px-6 py-8 ${viewMode === "kanban" ? "max-w-full" : "max-w-6xl"}`}>
+      <div className="mx-auto px-10 py-12 max-w-full">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-light" style={{ fontFamily: "'Playfair Display', serif" }}>
             Leads recebidos
