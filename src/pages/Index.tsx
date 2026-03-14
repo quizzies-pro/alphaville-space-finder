@@ -134,17 +134,17 @@ const Index = () => {
                   </div>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap justify-center gap-3 mb-10">
+                  <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-10">
                     {["Locação corporativa", "Acesso imediato", "Planta livre"].map((t) => (
-                      <span key={t} className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground" />
+                      <span key={t} className="flex items-center gap-1.5 text-[10px] md:text-xs text-muted-foreground">
+                        <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground" />
                         {t}
                       </span>
                     ))}
                   </div>
 
                   {/* Info box */}
-                  <div className="border border-border rounded-xl p-6 mb-10 text-left">
+                  <div className="border border-border rounded-xl p-4 md:p-6 mb-8 md:mb-10 text-left">
                     <div className="flex items-start gap-3">
                       <span className="text-muted-foreground mt-0.5">◆</span>
                       <div>
