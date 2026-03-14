@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Step, QuizButton, QuizLayout } from "@/components/quiz/QuizComponents";
 import { PropertyCarousel } from "@/components/quiz/PropertyCarousel";
+import { initPixel, trackPageView, trackViewContent } from "@/lib/meta-tracking";
 
 const QuizLanding = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    initPixel().then(() => {
+      trackPageView();
+      trackViewContent("Landing - Quiz Alphaville");
+    });
+  }, []);
 
   return (
     <QuizLayout>

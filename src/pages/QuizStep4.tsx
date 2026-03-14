@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useQuiz } from "@/components/quiz/QuizContext";
 import { Step, StepLabel, QuizButton, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import {
+  trackPageView,
+  trackQuizStep,
+  trackCompleteRegistration,
+  trackContact,
+} from "@/lib/meta-tracking";
 
-// TODO: Substituir pelo link real do WhatsApp
 const WHATSAPP_LINK = "https://wa.me/5511969735649";
 
 const QuizStep4 = () => {
   const { data, update } = useQuiz();
   const [submitting, setSubmitting] = useState(false);
 
+  useEffect(() => {
+    trackPageView();
+  }, []);
+
+  const getUserData = () => ({
+    email: data.lead_email,
+    phone: data.lead_whatsapp,
+    firstName: data.lead_name.split(" ")[0],
+    lastName: data.lead_name.split(" ").slice(1).join(" ") || undefined,
+  });
+
   const handleSubmit = async () => {
     if (!data.investment_match) return;
     setSubmitting(true);
+
+    // Track step 4 answer
+    trackQuizStep(4, "Investimento", data.investment_match, getUserData());
+
     try {
       const { error } = await supabase.from("quiz_leads").insert({
         lead_name: data.lead_name,
@@ -26,6 +46,13 @@ const QuizStep4 = () => {
         custom_message: data.custom_message || null,
       });
       if (error) throw error;
+
+      // Track CompleteRegistration
+      trackCompleteRegistration(getUserData());
+
+      // Track Contact (WhatsApp click)
+      trackContact(getUserData());
+
       const msg = encodeURIComponent(
         `Olá, completei a avaliação do andar comercial em Alphaville. Meu nome é ${data.lead_name}.`
       );

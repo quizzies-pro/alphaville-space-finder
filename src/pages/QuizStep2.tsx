@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "@/components/quiz/QuizContext";
-import { Step, StepLabel, QuizButton, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
+import { Step, StepLabel, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
+import { trackQuizStep, trackPageView } from "@/lib/meta-tracking";
 
 const QuizStep2 = () => {
   const navigate = useNavigate();
   const { data, update } = useQuiz();
+
+  useEffect(() => {
+    trackPageView();
+  }, []);
 
   return (
     <QuizLayout step={2}>
@@ -24,6 +30,11 @@ const QuizStep2 = () => {
           value={data.company_profile}
           onChange={(v) => {
             update("company_profile", v);
+            trackQuizStep(2, "Perfil Empresa", v, {
+              email: data.lead_email,
+              phone: data.lead_whatsapp,
+              firstName: data.lead_name.split(" ")[0],
+            });
             setTimeout(() => navigate("/etapa-3"), 400);
           }}
         />
