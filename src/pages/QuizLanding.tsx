@@ -8,9 +8,10 @@ const QuizLanding = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    initPixel();
-    trackPageView();
-    trackViewContent("Landing - Quiz Alphaville");
+    initPixel().then(() => {
+      trackPageView();
+      trackViewContent("Landing - Quiz Alphaville");
+    });
   }, []);
 
   return (
