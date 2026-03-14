@@ -1,16 +1,10 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "@/components/quiz/QuizContext";
 import { Step, StepLabel, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
-import { trackQuizStep, trackPageView } from "@/lib/meta-tracking";
 
 const QuizStep3 = () => {
   const navigate = useNavigate();
   const { data, update } = useQuiz();
-
-  useEffect(() => {
-    trackPageView();
-  }, []);
 
   return (
     <QuizLayout step={3}>
@@ -29,11 +23,6 @@ const QuizStep3 = () => {
           value={data.relocation_moment}
           onChange={(v) => {
             update("relocation_moment", v);
-            trackQuizStep(3, "Momento Relocação", v, {
-              email: data.lead_email,
-              phone: data.lead_whatsapp,
-              firstName: data.lead_name.split(" ")[0],
-            });
             setTimeout(() => navigate("/etapa-4"), 400);
           }}
         />
