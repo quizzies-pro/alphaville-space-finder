@@ -98,7 +98,7 @@ const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
   };
 
   return (
-    <div className="flex gap-3 overflow-x-auto pb-4" style={{ minHeight: "70vh" }}>
+    <div className="flex gap-3 overflow-x-auto pb-6 pr-6" style={{ minHeight: "calc(100vh - 140px)" }}>
       {STAGES.map((stage) => {
         const stageLeads = leads.filter((l) => l.stage === stage.id);
         const isDescartado = stage.id === "descartado";
