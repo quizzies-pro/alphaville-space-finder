@@ -9,7 +9,6 @@ import QuizStep1 from "./pages/QuizStep1.tsx";
 import QuizStep2 from "./pages/QuizStep2.tsx";
 import QuizStep3 from "./pages/QuizStep3.tsx";
 import QuizStep4 from "./pages/QuizStep4.tsx";
-
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
