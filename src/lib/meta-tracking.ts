@@ -41,13 +41,11 @@ interface TrackEventOptions {
   sourceUrl?: string;
 }
 
-// ---- Pixel ID (loaded from env at build time) ----
+// ---- Pixel ID (fetched from backend) ----
 
-const PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID || "";
-
-// ---- Helpers ----
-
+let PIXEL_ID = "";
 let pixelInitialized = false;
+let pixelInitPromise: Promise<void> | null = null;
 
 function generateEventId(): string {
   return `${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
