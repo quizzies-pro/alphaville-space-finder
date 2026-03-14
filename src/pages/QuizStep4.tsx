@@ -81,7 +81,9 @@ const QuizStep4 = () => {
         </div>
 
         <div className="mt-12">
-          <QuizButton onClick={handleSubmit}>Enviar avaliação</QuizButton>
+          <QuizButton onClick={handleSubmit}>
+            {submitting ? "Enviando..." : "Enviar avaliação"}
+          </QuizButton>
         </div>
       </Step>
     </QuizLayout>
