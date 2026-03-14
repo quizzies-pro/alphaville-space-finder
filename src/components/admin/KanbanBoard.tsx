@@ -146,6 +146,7 @@ const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
                     onDragStart={handleDragStart}
                     onDragEnd={handleDragEnd}
                     onMoveToStage={moveToStage}
+                    onClick={() => setSelectedLead(lead)}
                   />
                 ))}
               </AnimatePresence>
