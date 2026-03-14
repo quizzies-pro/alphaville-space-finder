@@ -9,6 +9,8 @@ import QuizStep1 from "./pages/QuizStep1.tsx";
 import QuizStep2 from "./pages/QuizStep2.tsx";
 import QuizStep3 from "./pages/QuizStep3.tsx";
 import QuizStep4 from "./pages/QuizStep4.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,7 +28,8 @@ const App = () => (
             <Route path="/etapa-2" element={<QuizStep2 />} />
             <Route path="/etapa-3" element={<QuizStep3 />} />
             <Route path="/etapa-4" element={<QuizStep4 />} />
-            
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </QuizProvider>
