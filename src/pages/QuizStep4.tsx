@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuiz } from "@/components/quiz/QuizContext";
-import { Step, StepLabel, QuizButton, QuizInput, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
+import { Step, StepLabel, QuizButton, RadioCards, QuizLayout } from "@/components/quiz/QuizComponents";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+// TODO: Substituir pelo link real do WhatsApp
+const WHATSAPP_LINK = "https://wa.me/5511999999999";
+
 const QuizStep4 = () => {
-  const navigate = useNavigate();
-  const { data, update, validateContacts } = useQuiz();
+  const { data, update } = useQuiz();
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async () => {
     if (!data.investment_match) return;
-    if (!validateContacts()) return;
     setSubmitting(true);
     try {
       const { error } = await supabase.from("quiz_leads").insert({
@@ -26,7 +26,10 @@ const QuizStep4 = () => {
         custom_message: data.custom_message || null,
       });
       if (error) throw error;
-      navigate("/resultado");
+      const msg = encodeURIComponent(
+        `Olá, completei a avaliação do andar comercial em Alphaville. Meu nome é ${data.lead_name}.`
+      );
+      window.open(`${WHATSAPP_LINK}?text=${msg}`, "_blank");
     } catch {
       toast.error("Erro ao enviar. Tente novamente.");
     } finally {
@@ -67,18 +70,6 @@ const QuizStep4 = () => {
             />
           </motion.div>
         )}
-
-        {/* Confirmação de dados */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-6">
-            Confirme seus dados
-          </p>
-          <div className="space-y-4">
-            <QuizInput label="Nome" value={data.lead_name} onChange={(v) => update("lead_name", v)} />
-            <QuizInput label="Email" type="email" value={data.lead_email} onChange={(v) => update("lead_email", v)} />
-            <QuizInput label="WhatsApp" type="tel" value={data.lead_whatsapp} onChange={(v) => update("lead_whatsapp", v)} />
-          </div>
-        </div>
 
         <div className="mt-12">
           <QuizButton onClick={handleSubmit}>
