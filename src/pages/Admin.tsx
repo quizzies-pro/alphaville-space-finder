@@ -236,7 +236,7 @@ const Admin = () => {
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Investimento</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Status</th>
                     <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Data</th>
-                    <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Ação</th>
+                    <th className="text-left px-8 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium whitespace-nowrap">Contato</th>
                   </tr>
                 </thead>
                 <tbody>
