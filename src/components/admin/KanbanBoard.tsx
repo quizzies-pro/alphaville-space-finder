@@ -147,6 +147,7 @@ const KanbanBoard = ({ leads, onLeadsChange, onDeleteLead }: KanbanBoardProps) =
                     onDragStart={handleDragStart}
                     onDragEnd={handleDragEnd}
                     onMoveToStage={moveToStage}
+                    onDelete={onDeleteLead}
                     onClick={() => setSelectedLead(lead)}
                   />
                 ))}
