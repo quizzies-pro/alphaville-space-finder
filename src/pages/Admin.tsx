@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import KanbanBoard from "@/components/admin/KanbanBoard";
 
 interface Lead {
   id: string;
@@ -12,7 +13,10 @@ interface Lead {
   investment_match: string | null;
   custom_message: string | null;
   submitted_at: string;
+  stage: string;
 }
+
+type ViewMode = "list" | "kanban";
 
 const Admin = () => {
   const [authed, setAuthed] = useState(false);
@@ -22,6 +26,7 @@ const Admin = () => {
   const [loginLoading, setLoginLoading] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>("kanban");
 
   useEffect(() => {
     const check = async () => {
@@ -141,12 +146,31 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className={`mx-auto px-6 py-8 ${viewMode === "kanban" ? "max-w-full" : "max-w-6xl"}`}>
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-light" style={{ fontFamily: "'Playfair Display', serif" }}>
             Leads recebidos
           </h1>
           <div className="flex items-center gap-4">
+            {/* View toggle */}
+            <div className="flex border border-border rounded overflow-hidden">
+              <button
+                onClick={() => setViewMode("kanban")}
+                className={`px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase transition-colors ${
+                  viewMode === "kanban" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Kanban
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={`px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase transition-colors ${
+                  viewMode === "list" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Lista
+              </button>
+            </div>
             <span className="text-xs text-muted-foreground tracking-[0.15em] uppercase">
               {leads.length} lead{leads.length !== 1 ? "s" : ""}
             </span>
@@ -163,6 +187,8 @@ const Admin = () => {
           <p className="text-muted-foreground text-sm">Carregando...</p>
         ) : leads.length === 0 ? (
           <p className="text-muted-foreground text-sm">Nenhum lead cadastrado ainda.</p>
+        ) : viewMode === "kanban" ? (
+          <KanbanBoard leads={leads} onUpdate={loadLeads} />
         ) : (
           <div className="border border-border rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
