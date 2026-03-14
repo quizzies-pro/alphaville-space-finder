@@ -179,7 +179,7 @@ const Index = () => {
             {step === 1 && (
               <Step key="s1">
                 <StepLabel>Etapa 1</StepLabel>
-                <h2 className="text-2xl md:text-3xl font-light mb-10">
+                <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Para liberar os detalhes completos do imóvel, informe seus dados:
                 </h2>
                 <div className="space-y-8">
