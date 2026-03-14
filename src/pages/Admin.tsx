@@ -260,4 +260,23 @@ const Admin = () => {
   );
 };
 
+function DeleteButton({ onDelete }: { onDelete: () => void }) {
+  const [confirm, setConfirm] = useState(false);
+  return confirm ? (
+    <button
+      onClick={(e) => { e.stopPropagation(); onDelete(); }}
+      className="text-xs tracking-[0.1em] uppercase text-destructive font-medium hover:text-destructive/80 transition-colors"
+    >
+      Confirmar
+    </button>
+  ) : (
+    <button
+      onClick={(e) => { e.stopPropagation(); setConfirm(true); }}
+      className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-destructive transition-colors"
+    >
+      Excluir
+    </button>
+  );
+}
+
 export default Admin;
