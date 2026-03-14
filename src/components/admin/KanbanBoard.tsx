@@ -30,6 +30,7 @@ const STAGES = [
 interface KanbanBoardProps {
   leads: Lead[];
   onLeadsChange: (leads: Lead[]) => void;
+  onDeleteLead: (leadId: string) => void;
 }
 
 const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
