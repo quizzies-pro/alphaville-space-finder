@@ -121,7 +121,7 @@ const Index = () => {
                   <div className="grid grid-cols-3 gap-3 mb-8">
                     {[
                       { big: "Andar", sub: "COMPLETO\nCORPORATIVO" },
-                      { big: "Alpha", sub: "VILLE\nSÃO PAULO" },
+                      { big: "Alphaville", sub: "SÃO PAULO" },
                       { big: "3 min", sub: "PARA SUA\nAVALIAÇÃO" },
                     ].map((card) => (
                       <div key={card.big} className="border border-border bg-card rounded-lg py-5 px-3">
