@@ -18,7 +18,10 @@ const QuizStep1 = () => {
           <QuizInput label="Email" type="email" value={data.lead_email} onChange={(v) => update("lead_email", v)} error={errors.lead_email} />
           <QuizInput label="WhatsApp" type="tel" value={data.lead_whatsapp} onChange={(v) => update("lead_whatsapp", v)} error={errors.lead_whatsapp} />
         </div>
-        <div className="mt-12">
+        <p className="text-[10px] md:text-xs text-muted-foreground mt-6 leading-relaxed max-w-md">
+          Ao clicar em "Continuar", você concorda com o uso dos seus dados pessoais para fins de contato comercial, conforme a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018). Seus dados não serão compartilhados com terceiros.
+        </p>
+        <div className="mt-6">
           <QuizButton onClick={() => { if (validateContacts()) navigate("/etapa-2"); }}>
             Continuar
           </QuizButton>
