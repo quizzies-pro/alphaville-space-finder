@@ -199,7 +199,7 @@ const Index = () => {
               <Step key="s2">
                 <StepLabel>Etapa 2</StepLabel>
                 <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Qual melhor descreve sua empresa hoje?
+                  Qual melhor descreve <em className="italic">sua empresa</em> hoje?
                 </h2>
                 <RadioCards
                   options={[
