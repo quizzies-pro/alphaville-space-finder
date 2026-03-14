@@ -124,7 +124,7 @@ const Index = () => {
                       { big: "Alphaville", sub: "SÃO PAULO" },
                       { big: "3 min", sub: "PARA SUA\nAVALIAÇÃO" },
                     ].map((card) => (
-                      <div key={card.big} className="border border-border bg-card rounded-lg py-5 px-3">
+                      <div key={card.big} className="border border-border bg-card rounded-lg py-5 px-3 flex flex-col items-center justify-center min-h-[100px]">
                         <p className="text-xl md:text-2xl font-medium mb-1">{card.big}</p>
                         <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground whitespace-pre-line leading-snug">
                           {card.sub}
