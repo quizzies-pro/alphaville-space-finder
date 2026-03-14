@@ -27,7 +27,7 @@ const App = () => (
             <Route path="/etapa-2" element={<QuizStep2 />} />
             <Route path="/etapa-3" element={<QuizStep3 />} />
             <Route path="/etapa-4" element={<QuizStep4 />} />
-            <Route path="/resultado" element={<QuizResult />} />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </QuizProvider>
