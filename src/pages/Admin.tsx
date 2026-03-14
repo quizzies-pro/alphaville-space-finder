@@ -220,19 +220,19 @@ const Admin = () => {
                 <tbody>
                   {leads.map((lead) => (
                     <tr key={lead.id} className="border-b border-border last:border-0 hover:bg-card/50 transition-colors">
-                      <td className="px-4 py-3">{lead.lead_name}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{lead.lead_email}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{lead.lead_whatsapp}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.company_profile || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.relocation_moment || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{lead.investment_match || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs whitespace-nowrap">
+                      <td className="px-6 py-5 font-medium">{lead.lead_name}</td>
+                      <td className="px-6 py-5 text-muted-foreground">{lead.lead_email}</td>
+                      <td className="px-6 py-5 text-muted-foreground">{lead.lead_whatsapp}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs max-w-[160px]">{lead.company_profile || "—"}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs max-w-[160px]">{lead.relocation_moment || "—"}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs max-w-[180px]">{lead.investment_match || "—"}</td>
+                      <td className="px-6 py-5 text-muted-foreground text-xs whitespace-nowrap">
                         {new Date(lead.submitted_at).toLocaleDateString("pt-BR", {
                           day: "2-digit", month: "2-digit", year: "2-digit",
                           hour: "2-digit", minute: "2-digit",
                         })}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
                           <a
                             href={`https://wa.me/55${lead.lead_whatsapp.replace(/\D/g, "")}`}
