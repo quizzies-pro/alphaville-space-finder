@@ -224,7 +224,7 @@ const Index = () => {
               <Step key="s3">
                 <StepLabel>Etapa 3</StepLabel>
                 <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Em que momento sua empresa está em relação a um novo espaço comercial?
+                  Em que <em className="italic">momento</em> sua empresa está em relação a um <em className="italic">novo espaço comercial</em>?
                 </h2>
                 <RadioCards
                   options={[
