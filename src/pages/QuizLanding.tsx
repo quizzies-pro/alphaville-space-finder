@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Step, QuizButton, QuizLayout } from "@/components/quiz/QuizComponents";
+import { PropertyCarousel } from "@/components/quiz/PropertyCarousel";
 
 const QuizLanding = () => {
   const navigate = useNavigate();
