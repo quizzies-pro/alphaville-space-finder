@@ -184,6 +184,7 @@ function LeadCard({
   onDragStart,
   onDragEnd,
   onMoveToStage,
+  onDelete,
   onClick,
 }: {
   lead: Lead;
@@ -191,8 +192,10 @@ function LeadCard({
   onDragStart: (e: React.DragEvent, id: string) => void;
   onDragEnd: (e: React.DragEvent) => void;
   onMoveToStage: (id: string, stage: string) => void;
+  onDelete: (id: string) => void;
   onClick: () => void;
 }) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   return (
