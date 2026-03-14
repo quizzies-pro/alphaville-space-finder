@@ -30,9 +30,10 @@ const STAGES = [
 interface KanbanBoardProps {
   leads: Lead[];
   onLeadsChange: (leads: Lead[]) => void;
+  onDeleteLead: (leadId: string) => void;
 }
 
-const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
+const KanbanBoard = ({ leads, onLeadsChange, onDeleteLead }: KanbanBoardProps) => {
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [overStage, setOverStage] = useState<string | null>(null);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
@@ -146,6 +147,7 @@ const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
                     onDragStart={handleDragStart}
                     onDragEnd={handleDragEnd}
                     onMoveToStage={moveToStage}
+                    onDelete={onDeleteLead}
                     onClick={() => setSelectedLead(lead)}
                   />
                 ))}
@@ -165,6 +167,10 @@ const KanbanBoard = ({ leads, onLeadsChange }: KanbanBoardProps) => {
               moveToStage(selectedLead.id, stage);
               setSelectedLead({ ...selectedLead, stage });
             }}
+            onDelete={() => {
+              onDeleteLead(selectedLead.id);
+              setSelectedLead(null);
+            }}
           />
         )}
       </AnimatePresence>
@@ -178,6 +184,7 @@ function LeadCard({
   onDragStart,
   onDragEnd,
   onMoveToStage,
+  onDelete,
   onClick,
 }: {
   lead: Lead;
@@ -185,8 +192,10 @@ function LeadCard({
   onDragStart: (e: React.DragEvent, id: string) => void;
   onDragEnd: (e: React.DragEvent) => void;
   onMoveToStage: (id: string, stage: string) => void;
+  onDelete: (id: string) => void;
   onClick: () => void;
 }) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -262,6 +271,27 @@ function LeadCard({
                 {stage.label}
               </button>
             ))}
+            <div className="border-t border-border mt-1 pt-1">
+              {!confirmDelete ? (
+                <button
+                  onClick={() => setConfirmDelete(true)}
+                  className="w-full text-left px-3 py-1.5 text-xs text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                  Excluir lead
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    onDelete(lead.id);
+                    setShowMenu(false);
+                    setConfirmDelete(false);
+                  }}
+                  className="w-full text-left px-3 py-1.5 text-xs text-destructive font-medium hover:bg-destructive/10 transition-colors"
+                >
+                  Confirmar exclusão
+                </button>
+              )}
+            </div>
           </div>
         </>
       )}
@@ -273,11 +303,14 @@ function LeadDetailPopup({
   lead,
   onClose,
   onMoveToStage,
+  onDelete,
 }: {
   lead: Lead;
   onClose: () => void;
   onMoveToStage: (stage: string) => void;
+  onDelete: () => void;
 }) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const currentStage = STAGES.find((s) => s.id === lead.stage);
 
   return (
@@ -356,7 +389,7 @@ function LeadDetailPopup({
           </div>
 
           {/* Footer */}
-          <div className="p-5 border-t border-border">
+          <div className="p-5 border-t border-border space-y-2">
             <a
               href={`https://wa.me/55${lead.lead_whatsapp.replace(/\D/g, "")}`}
               target="_blank"
@@ -368,6 +401,21 @@ function LeadDetailPopup({
               </svg>
               Chamar no WhatsApp
             </a>
+            {!confirmDelete ? (
+              <button
+                onClick={() => setConfirmDelete(true)}
+                className="w-full flex items-center justify-center gap-2 text-destructive px-6 py-3 text-xs tracking-[0.15em] uppercase font-medium border border-destructive/30 hover:bg-destructive hover:text-destructive-foreground transition-all duration-300"
+              >
+                Excluir lead
+              </button>
+            ) : (
+              <button
+                onClick={onDelete}
+                className="w-full flex items-center justify-center gap-2 bg-destructive text-destructive-foreground px-6 py-3 text-xs tracking-[0.15em] uppercase font-medium border border-destructive transition-all duration-300"
+              >
+                Confirmar exclusão
+              </button>
+            )}
           </div>
         </div>
       </motion.div>

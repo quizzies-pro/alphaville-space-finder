@@ -1,0 +1,1 @@
+CREATE POLICY "Admins can delete leads" ON public.quiz_leads FOR DELETE TO public USING (has_role(auth.uid(), 'admin'::app_role));
