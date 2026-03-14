@@ -245,7 +245,7 @@ const Admin = () => {
                       <td className="px-8 py-5 text-muted-foreground whitespace-nowrap">{lead.lead_email}</td>
                       <td className="px-8 py-5 text-muted-foreground whitespace-nowrap">{lead.lead_whatsapp}</td>
                       <td className="px-8 py-5 text-muted-foreground text-xs">{lead.investment_match || "—"}</td>
-                      <td className="px-8 py-5">
+                      <td className="px-8 py-5" onClick={(e) => e.stopPropagation()}>
                         <select
                           value={lead.stage}
                           onChange={(e) => handleStageChange(lead.id, e.target.value)}
