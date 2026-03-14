@@ -24,6 +24,7 @@ export type Database = {
           lead_name: string
           lead_whatsapp: string
           relocation_moment: string | null
+          stage: string
           submitted_at: string
         }
         Insert: {
@@ -35,6 +36,7 @@ export type Database = {
           lead_name: string
           lead_whatsapp: string
           relocation_moment?: string | null
+          stage?: string
           submitted_at?: string
         }
         Update: {
@@ -46,6 +48,7 @@ export type Database = {
           lead_name?: string
           lead_whatsapp?: string
           relocation_moment?: string | null
+          stage?: string
           submitted_at?: string
         }
         Relationships: []
