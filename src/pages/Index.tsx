@@ -128,7 +128,7 @@ const Index = () => {
                   <QuizInput label="WhatsApp" type="tel" value={data.lead_whatsapp} onChange={(v) => update("lead_whatsapp", v)} error={errors.lead_whatsapp} />
                 </div>
                 <div className="mt-12">
-                  <QuizButton onClick={() => { setStep(2); if (!validateStep2()) setStep(1); else setStep(2); }}>
+                  <QuizButton onClick={() => { if (validateStep2()) setStep(2); }}>
                     Continuar
                   </QuizButton>
                 </div>
