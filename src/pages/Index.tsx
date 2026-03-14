@@ -112,7 +112,7 @@ const Index = () => {
                   </h1>
 
                   {/* Subtitle */}
-                  <p className="text-muted-foreground text-sm md:text-base mb-12 max-w-md mx-auto leading-relaxed">
+                  <p className="text-muted-foreground text-sm md:text-base mb-12 max-w-xl mx-auto leading-relaxed">
                     Um andar comercial completo em Alphaville está disponível para locação.<br />
                     Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
                   </p>
