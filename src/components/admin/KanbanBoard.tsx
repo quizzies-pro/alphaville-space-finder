@@ -389,7 +389,7 @@ function LeadDetailPopup({
           </div>
 
           {/* Footer */}
-          <div className="p-5 border-t border-border">
+          <div className="p-5 border-t border-border space-y-2">
             <a
               href={`https://wa.me/55${lead.lead_whatsapp.replace(/\D/g, "")}`}
               target="_blank"
@@ -401,6 +401,21 @@ function LeadDetailPopup({
               </svg>
               Chamar no WhatsApp
             </a>
+            {!confirmDelete ? (
+              <button
+                onClick={() => setConfirmDelete(true)}
+                className="w-full flex items-center justify-center gap-2 text-destructive px-6 py-3 text-xs tracking-[0.15em] uppercase font-medium border border-destructive/30 hover:bg-destructive hover:text-destructive-foreground transition-all duration-300"
+              >
+                Excluir lead
+              </button>
+            ) : (
+              <button
+                onClick={onDelete}
+                className="w-full flex items-center justify-center gap-2 bg-destructive text-destructive-foreground px-6 py-3 text-xs tracking-[0.15em] uppercase font-medium border border-destructive transition-all duration-300"
+              >
+                Confirmar exclusão
+              </button>
+            )}
           </div>
         </div>
       </motion.div>

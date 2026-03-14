@@ -61,6 +61,18 @@ const Admin = () => {
     setLeadsLoading(false);
   };
 
+  const handleDeleteLead = async (leadId: string) => {
+    const prev = leads;
+    setLeads(leads.filter((l) => l.id !== leadId));
+    const { error } = await supabase.from("quiz_leads").delete().eq("id", leadId);
+    if (error) {
+      setLeads(prev);
+      toast.error("Erro ao excluir lead");
+    } else {
+      toast.success("Lead excluído");
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginLoading(true);
