@@ -26,6 +26,7 @@ const Admin = () => {
   const [loginLoading, setLoginLoading] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>("kanban");
 
   useEffect(() => {
     const check = async () => {
