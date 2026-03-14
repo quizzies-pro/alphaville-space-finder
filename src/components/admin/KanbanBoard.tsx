@@ -303,11 +303,14 @@ function LeadDetailPopup({
   lead,
   onClose,
   onMoveToStage,
+  onDelete,
 }: {
   lead: Lead;
   onClose: () => void;
   onMoveToStage: (stage: string) => void;
+  onDelete: () => void;
 }) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const currentStage = STAGES.find((s) => s.id === lead.stage);
 
   return (
