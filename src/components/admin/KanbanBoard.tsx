@@ -271,6 +271,27 @@ function LeadCard({
                 {stage.label}
               </button>
             ))}
+            <div className="border-t border-border mt-1 pt-1">
+              {!confirmDelete ? (
+                <button
+                  onClick={() => setConfirmDelete(true)}
+                  className="w-full text-left px-3 py-1.5 text-xs text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                  Excluir lead
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    onDelete(lead.id);
+                    setShowMenu(false);
+                    setConfirmDelete(false);
+                  }}
+                  className="w-full text-left px-3 py-1.5 text-xs text-destructive font-medium hover:bg-destructive/10 transition-colors"
+                >
+                  Confirmar exclusão
+                </button>
+              )}
+            </div>
           </div>
         </>
       )}
