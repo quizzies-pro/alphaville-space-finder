@@ -207,14 +207,14 @@ const Admin = () => {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-card">
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Nome</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Email</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">WhatsApp</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Perfil</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Momento</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Investimento</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Data</th>
-                    <th className="text-left px-4 py-3 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Ação</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Nome</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Email</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">WhatsApp</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Perfil</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Momento</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Investimento</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Data</th>
+                    <th className="text-left px-6 py-4 text-xs tracking-[0.15em] uppercase text-muted-foreground font-medium">Ação</th>
                   </tr>
                 </thead>
                 <tbody>
