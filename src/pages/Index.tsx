@@ -179,7 +179,7 @@ const Index = () => {
             {step === 1 && (
               <Step key="s1">
                 <StepLabel>Etapa 1</StepLabel>
-                <h2 className="text-2xl md:text-3xl font-light mb-10">
+                <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Para liberar os detalhes completos do imóvel, informe seus dados:
                 </h2>
                 <div className="space-y-8">
@@ -198,7 +198,7 @@ const Index = () => {
             {step === 2 && (
               <Step key="s2">
                 <StepLabel>Etapa 2</StepLabel>
-                <h2 className="text-2xl md:text-3xl font-light mb-10">
+                <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Qual melhor descreve sua empresa hoje?
                 </h2>
                 <RadioCards
@@ -223,7 +223,7 @@ const Index = () => {
             {step === 3 && (
               <Step key="s3">
                 <StepLabel>Etapa 3</StepLabel>
-                <h2 className="text-2xl md:text-3xl font-light mb-10">
+                <h2 className="text-2xl md:text-3xl font-light mb-10" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Em que momento sua empresa está em relação a um novo espaço comercial?
                 </h2>
                 <RadioCards
@@ -247,7 +247,7 @@ const Index = () => {
             {step === 4 && (
               <Step key="s4">
                 <StepLabel>Etapa 4</StepLabel>
-                <h2 className="text-xl md:text-2xl font-light mb-4">
+                <h2 className="text-xl md:text-2xl font-light mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Considerando que o valor do aluguel deste andar comercial é de aproximadamente
                 </h2>
                 <p className="text-3xl md:text-4xl font-light mb-6 text-primary">
@@ -303,7 +303,7 @@ const Index = () => {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-light mb-6">
+                  <h2 className="text-2xl md:text-3xl font-light mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Seu perfil é compatível com este imóvel
                   </h2>
                   <p className="text-muted-foreground mb-10 max-w-md mx-auto text-sm leading-relaxed">
