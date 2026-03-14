@@ -305,16 +305,18 @@ function DeleteButton({ onDelete }: { onDelete: () => void }) {
   return confirm ? (
     <button
       onClick={(e) => { e.stopPropagation(); onDelete(); }}
-      className="text-xs tracking-[0.1em] uppercase text-destructive font-medium hover:text-destructive/80 transition-colors"
+      className="text-destructive hover:text-destructive/80 transition-colors p-1.5 rounded hover:bg-destructive/10"
+      title="Confirmar exclusão"
     >
-      Confirmar
+      <Trash2 size={16} strokeWidth={2.5} />
     </button>
   ) : (
     <button
       onClick={(e) => { e.stopPropagation(); setConfirm(true); }}
-      className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-destructive transition-colors"
+      className="text-muted-foreground hover:text-destructive transition-colors p-1.5 rounded hover:bg-destructive/10"
+      title="Excluir"
     >
-      Excluir
+      <Trash2 size={16} />
     </button>
   );
 }
