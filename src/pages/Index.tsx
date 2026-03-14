@@ -95,24 +95,84 @@ const Index = () => {
           <AnimatePresence mode="wait">
             {step === 0 && (
               <Step key="landing">
-                <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-12">
-                  Locação corporativa &nbsp;/&nbsp; Alphaville — SP
-                </p>
-                <h1 className="text-3xl md:text-4xl font-light leading-tight mb-8">
-                  Este andar comercial em Alphaville é adequado para sua empresa?
-                </h1>
-                <p className="text-muted-foreground text-base mb-12 max-w-md">
-                  Responda 3 perguntas rápidas para verificarmos se o perfil da
-                  sua empresa está alinhado com este imóvel corporativo.
-                </p>
-                <div className="flex flex-wrap gap-3 mb-16">
-                  {["Andar comercial completo", "Alphaville – São Paulo", "Locação corporativa"].map((t) => (
-                    <span key={t} className="text-xs tracking-[0.15em] uppercase border border-border px-4 py-2 text-muted-foreground">
-                      {t}
+                <div className="text-center">
+                  {/* Top badge */}
+                  <div className="inline-flex items-center gap-2 border border-border rounded-full px-5 py-2 mb-10">
+                    <span className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
+                      Oportunidade exclusiva · Alphaville, SP
                     </span>
-                  ))}
+                  </div>
+
+                  {/* Main title */}
+                  <h1 className="text-3xl md:text-5xl leading-tight mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    Sua empresa já está<br />
+                    <em className="italic">maior do que o espaço</em><br />
+                    onde ela opera?
+                  </h1>
+
+                  {/* Subtitle */}
+                  <p className="text-muted-foreground text-sm md:text-base mb-12 max-w-md mx-auto leading-relaxed">
+                    Um andar comercial completo em Alphaville está disponível para locação.<br />
+                    Responda 3 perguntas rápidas e descubra se o perfil da sua empresa está alinhado com este imóvel.
+                  </p>
+
+                  {/* Stat cards */}
+                  <div className="grid grid-cols-3 gap-3 mb-8">
+                    {[
+                      { big: "Andar", sub: "COMPLETO\nCORPORATIVO" },
+                      { big: "Alpha", sub: "VILLE\nSÃO PAULO" },
+                      { big: "3 min", sub: "PARA SUA\nAVALIAÇÃO" },
+                    ].map((card) => (
+                      <div key={card.big} className="border border-border bg-card rounded-lg py-5 px-3">
+                        <p className="text-xl md:text-2xl font-medium mb-1">{card.big}</p>
+                        <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground whitespace-pre-line leading-snug">
+                          {card.sub}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap justify-center gap-3 mb-10">
+                    {["Locação corporativa", "Acesso imediato", "Planta livre"].map((t) => (
+                      <span key={t} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground" />
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Info box */}
+                  <div className="border border-border rounded-xl p-6 mb-10 text-left">
+                    <div className="flex items-start gap-3">
+                      <span className="text-muted-foreground mt-0.5">◆</span>
+                      <div>
+                        <p className="text-sm font-medium mb-2">Por que essa avaliação existe?</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          Este imóvel é voltado a empresas com real intenção de expansão. A avaliação garante
+                          que você receba apenas informações relevantes ao seu momento — sem perda de
+                          tempo para nenhuma das partes.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CTA */}
+                  <QuizButton onClick={next}>Fazer avaliação rápida</QuizButton>
+
+                  {/* Footer text */}
+                  <p className="text-xs text-muted-foreground mt-6">
+                    Leva menos de 3 minutos · Sem compromisso
+                  </p>
+
+                  {/* Down arrow */}
+                  <div className="mt-6 flex justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground animate-bounce">
+                      <path d="M12 5v14M19 12l-7 7-7-7" />
+                    </svg>
+                  </div>
                 </div>
-                <QuizButton onClick={next}>Fazer avaliação rápida</QuizButton>
               </Step>
             )}
 
