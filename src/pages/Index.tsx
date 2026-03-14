@@ -247,7 +247,7 @@ const Index = () => {
             {step === 4 && (
               <Step key="s4">
                 <StepLabel>Etapa 4</StepLabel>
-                <h2 className="text-xl md:text-2xl font-light mb-4">
+                <h2 className="text-xl md:text-2xl font-light mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Considerando que o valor do aluguel deste andar comercial é de aproximadamente
                 </h2>
                 <p className="text-3xl md:text-4xl font-light mb-6 text-primary">
