@@ -188,7 +188,7 @@ const Admin = () => {
         ) : leads.length === 0 ? (
           <p className="text-muted-foreground text-sm">Nenhum lead cadastrado ainda.</p>
         ) : viewMode === "kanban" ? (
-          <KanbanBoard leads={leads} onUpdate={loadLeads} />
+          <KanbanBoard leads={leads} onLeadsChange={setLeads} />
         ) : (
           <div className="border border-border rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
