@@ -85,8 +85,27 @@ function getUserAgent(): string {
 
 // ---- Pixel (Browser-side) ----
 
-export function initPixel(): void {
-  if (pixelInitialized || !PIXEL_ID) return;
+export async function initPixel(): Promise<void> {
+  if (pixelInitialized) return;
+  
+  // Only fetch once
+  if (!pixelInitPromise) {
+    pixelInitPromise = (async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke("meta-pixel-config");
+        if (error) throw error;
+        if (data?.pixel_id) {
+          PIXEL_ID = data.pixel_id;
+        }
+      } catch (err) {
+        console.warn("[Meta Tracking] Could not fetch pixel ID:", err);
+      }
+    })();
+  }
+  
+  await pixelInitPromise;
+  
+  if (!PIXEL_ID) return;
   
   const fbq = (window as any).fbq;
   if (!fbq) {
